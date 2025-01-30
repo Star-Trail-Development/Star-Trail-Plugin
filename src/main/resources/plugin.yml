@@ -1,8 +1,8 @@
 name: StarTrailPlugin
-version: '1.0'
+version: ''
 main: com.dark2932.startrailplugin.StarTrailPlugin
 api-version: '1.20'
-prefix: §b[Star Trail]§r
+prefix: Star Trail
 load: STARTUP
 authors: [ Dark2932 ]
 description: A self-developed plugin for Star Trail.

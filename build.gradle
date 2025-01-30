@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.dark2932'
-version = '1.0'
+version = ''
 
 repositories {
     mavenCentral()
