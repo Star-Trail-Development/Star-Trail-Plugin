@@ -1,0 +1,24 @@
+name: StarTrailPlugin
+version: '1.0'
+main: com.dark2932.startrailplugin.StarTrailPlugin
+api-version: '1.20'
+prefix: §b[Star Trail]§r
+load: STARTUP
+authors: [ Dark2932 ]
+description: A self-developed plugin for Star Trail.
+
+commands:
+  gethead:
+    description: Get one's head.
+    permission: startrailplugin.gethead
+    permission-message: §cYou have no permission to use this command.
+    usage: /<command>
+
+permissions:
+  startrailplugin.*:
+    description: Permissions of StarTrailPlugin.
+    children:
+      startrailplugin.gethead: true
+  startrailplugin.gethead:
+    description: Permissions of /gethead.
+    default: true

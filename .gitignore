@@ -1,0 +1,6 @@
+.gradle
+.idea
+server
+
+build/*
+!build/libs
