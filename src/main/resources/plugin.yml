@@ -19,6 +19,14 @@ permissions:
     description: Permissions of StarTrailPlugin.
     children:
       startrailplugin.gethead: true
+      startrailplugin.block: true
+      startrailplugin.interact: true
   startrailplugin.gethead:
-    description: Permissions of /gethead.
+    description: Permission of /gethead.
     default: true
+  startrailplugin.block:
+    description: Permission of breaking and placing blocks in Stellarale.
+    default: op
+  startrailplugin.interact:
+    description: Permission of interact things in Stellarale.
+    default: op
