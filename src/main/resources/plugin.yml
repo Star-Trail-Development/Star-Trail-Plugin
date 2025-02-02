@@ -10,23 +10,32 @@ description: A self-developed plugin for Star Trail.
 commands:
   gethead:
     description: Get one's head.
-    permission: startrailplugin.gethead
-    permission-message: §cYou have no permission to use this command.
-    usage: /<command>
+    permission: startrailplugin.command.gethead
+    permission-message: '§c你无权使用此命令。'
+    usage: "§e用法: /<command> [name]"
+  banblock:
+    description: Stop the physical action of specific blocks.
+    permission: startrailplugin.command.banblock
+    permission-message: '§c你无权使用此命令。'
+    usage: '§e用法: /<command> [world]'
 
 permissions:
   startrailplugin.*:
     description: Permissions of StarTrailPlugin.
     children:
-      startrailplugin.gethead: true
+      startrailplugin.command.*: true
       startrailplugin.block: true
-      startrailplugin.interact: true
-  startrailplugin.gethead:
-    description: Permission of /gethead.
-    default: true
-  startrailplugin.block:
-    description: Permission of breaking and placing blocks in Stellarale.
+  startrailplugin.command.*:
+    description: Permissions of the commands of StarTrailPlugin.
+    children:
+      startrailplugin.command.gethead: true
+      startrailplugin.command.banblock: true
+  startrailplugin.command.gethead:
+    description: Permission of the command 'gethead'.
     default: op
-  startrailplugin.interact:
-    description: Permission of interact things in Stellarale.
+  startrailplugin.command.banblock:
+    description: Permission of the command 'banblock'.
+    default: op
+  startrailplugin.block:
+    description: Permission of breaking, placing and interacting blocks in world.
     default: op

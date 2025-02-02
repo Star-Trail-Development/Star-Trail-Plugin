@@ -13,18 +13,23 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.List;
+
 public class PreventPlayerInteractInMainEvent implements Listener {
+
+    private static final List<String> WORLDS = List.of(new String[]{"main", "memorial"});
+    private static final String PERMISSION = "startrailplugin.block";
 
     @EventHandler
     public void onPlayerInteractBlock(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.interact")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
 
                 //Item Frame and Armor Stand
                 //—————————————————————————————————————————————————————————————————
-                final PlayerInventory inv = player.getInventory();
+                PlayerInventory inv = player.getInventory();
                 if ((inv.getItemInMainHand().toString().toLowerCase().contains("frame") || inv.getItemInOffHand().toString().toLowerCase().contains("frame")) ||
                     (inv.getItemInMainHand().toString().toLowerCase().contains("armor") || inv.getItemInOffHand().toString().toLowerCase().contains("armor"))) {
                     MessageUtil.sendWarnMessage(player, "放置它");
@@ -32,12 +37,12 @@ public class PreventPlayerInteractInMainEvent implements Listener {
                 }
                 //—————————————————————————————————————————————————————————————————
 
-                final Material type = event.getClickedBlock().getType();
+                Material type = event.getClickedBlock().getType();
                 if (type.isInteractable()) {
 
                     //other vanilla blocks
                     //—————————————————————————————————————————————————————————————————
-                    final String dataName = type.data.getName();
+                    String dataName = type.data.getName();
                     if (dataName.contains("block.data.type")) {
                         if (!(dataName.contains("Door") || dataName.contains("Gate") || dataName.contains("Switch") ||
                               dataName.contains("Campfire") || dataName.contains("Bell") || dataName.contains("Jukebox") ||
@@ -70,7 +75,7 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerBreakBlock(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             MessageUtil.sendWarnMessage(player, "破坏方块");
             event.setCancelled(true);
         }
@@ -79,8 +84,8 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerPlaceBlock(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
-            final String dataName = event.getBlockReplacedState().getType().data.getName();
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
+            String dataName = event.getBlockReplacedState().getType().data.getName();
             if (!(dataName.contains("Jukebox"))) {
                 MessageUtil.sendWarnMessage(player, "放置方块");
                 event.setCancelled(true);
@@ -91,7 +96,7 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerTakeLecternBook(PlayerTakeLecternBookEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             MessageUtil.sendWarnMessage(player, "从讲台上取书");
             event.setCancelled(true);
         }
@@ -100,8 +105,8 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
-            final String entityName = event.getRightClicked().getName();
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
+            String entityName = event.getRightClicked().getName();
             if (entityName.toLowerCase().contains("frame") || entityName.toLowerCase().contains("armor")) {
                 MessageUtil.sendWarnMessage(player, "对其进行交互");
                 event.setCancelled(true);
@@ -113,8 +118,8 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     public void onPlayerDamageEntity(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         if (damager instanceof Player player) {
-            if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
-                final String entityName = event.getEntity().getName();
+            if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
+                String entityName = event.getEntity().getName();
                 if (entityName.toLowerCase().contains("frame") || entityName.toLowerCase().contains("armor")) {
                     MessageUtil.sendWarnMessage(player, "对其进行破坏");
                     event.setCancelled(true);
@@ -126,7 +131,7 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerBucketFill(PlayerBucketFillEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             MessageUtil.sendWarnMessage(player, "使用桶");
             event.setCancelled(true);
         }
@@ -135,7 +140,7 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             MessageUtil.sendWarnMessage(player, "使用桶");
             event.setCancelled(true);
         }
@@ -144,7 +149,7 @@ public class PreventPlayerInteractInMainEvent implements Listener {
     @EventHandler
     public void onPlayerBucketEntity(PlayerBucketEntityEvent event) {
         Player player = event.getPlayer();
-        if (!player.isOp() && !player.hasPermission("startrailplugin.block")) {
+        if (!player.hasPermission(PERMISSION) && WORLDS.contains(player.getWorld().getName())) {
             MessageUtil.sendWarnMessage(player, "使用桶");
             event.setCancelled(true);
         }
