@@ -38,26 +38,24 @@ public class PreventPlayerInteractInMainEvent implements Listener {
                 //—————————————————————————————————————————————————————————————————
 
                 Material type = event.getClickedBlock().getType();
+                String typeName = type.toString().toLowerCase();
                 if (type.isInteractable()) {
+
+                    //getTypeName
+                    if (player.getName().equals("Dark2932")) player.sendMessage(typeName);
 
                     //other vanilla blocks
                     //—————————————————————————————————————————————————————————————————
-                    String dataName = type.data.getName();
-                    if (dataName.contains("block.data.type")) {
-                        if (!(dataName.contains("Door") || dataName.contains("Gate") || dataName.contains("Switch") ||
-                              dataName.contains("Campfire") || dataName.contains("Bell") || dataName.contains("Jukebox") ||
-                              dataName.contains("NoteBlock") || dataName.contains("Grindstone") || dataName.contains("BrewingStand") ||
-                              dataName.contains("Furnace") || dataName.contains("Slab") || dataName.contains("Stairs") ||
-                              dataName.contains("Lectern") || dataName.contains("ChiseledBookshelf"))) {
-                            MessageUtil.sendWarnMessage(player, "对其进行交互");
-                            event.setCancelled(true);
-                        }
-                    } else if (dataName.contains("material.MaterialData")) {
-                        String typeName = type.toString().toLowerCase();
-                        if (!(typeName.contains("table") || typeName.contains("beacon") || typeName.contains("cauldron"))) {
-                            MessageUtil.sendWarnMessage(player, "对其进行交互");
-                            event.setCancelled(true);
-                        }
+                    if (!(typeName.contains("door") || typeName.contains("gate") || typeName.contains("campfire") ||
+                            typeName.contains("button") || typeName.contains("lever") || typeName.contains("jukebox") ||
+                            typeName.contains("note_block") || typeName.contains("grindstone") || typeName.contains("brewing_stand") ||
+                            typeName.contains("furnace") || typeName.contains("slab") || typeName.contains("stairs") ||
+                            typeName.contains("lectern") || typeName.contains("chiseled_bookshelf") || typeName.contains("ender_chest") ||
+                            typeName.contains("table") || typeName.contains("beacon") || typeName.contains("cauldron") ||
+                            typeName.contains("bell") || typeName.contains("anvil") || typeName.contains("loom") ||
+                            typeName.contains("smoker") || typeName.contains("stonecutter"))) {
+                        MessageUtil.sendWarnMessage(player, "对其进行交互");
+                        event.setCancelled(true);
                     }
                     //—————————————————————————————————————————————————————————————————
 
